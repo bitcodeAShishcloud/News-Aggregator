@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Aggregator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>News Aggregator</h1>
+        <nav>
+            <a href="#" onclick="showSection('news-feed')">Home</a>
+            <a href="#" onclick="showSection('login-form')">Login</a>
+            <a href="#" onclick="showSection('register-form')">Register</a>
+        </nav>
+    </header>
+    <main>
+        <section id="news-feed">
+            <!-- News articles will be loaded here -->
+        </section>
+        <section id="login-form" style="display:none;">
+            <h2>Login</h2>
+            <form method="POST" action="auth.php">
+                <input type="hidden" name="action" value="login">
+                <label>Username:<br><input type="text" name="username" required></label><br>
+                <label>Password:<br><input type="password" name="password" required></label><br>
+                <button type="submit">Login</button>
+            </form>
+        </section>
+        <section id="register-form" style="display:none;">
+            <h2>Register</h2>
+            <form method="POST" action="auth.php">
+                <input type="hidden" name="action" value="register">
+                <label>Username:<br><input type="text" name="username" required></label><br>
+                <label>Password:<br><input type="password" name="password" required></label><br>
+                <button type="submit">Register</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 News Aggregator</p>
+    </footer>
+    <script src="app.js"></script>
+</body>
+</html>
