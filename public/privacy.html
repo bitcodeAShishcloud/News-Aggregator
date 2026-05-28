@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - News Aggregator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1d35 25%, #0f1419 75%, #000000 100%);
+            background-attachment: fixed;
+            color: #ffffff;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, rgba(15, 20, 35, 0.98) 0%, rgba(10, 14, 25, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(100, 181, 246, 0.15);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 0 1px rgba(100, 181, 246, 0.3);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #64b5f6 0%, #90caf9 50%, #bbdefb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .back-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .back-link:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+        
+        /* Language Selector */
+        .language-selector {
+            margin-bottom: 3rem;
+        }
+        
+        .language-select {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 0.5rem 2rem 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+        }
+        
+        .language-select:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Published Date */
+        .published-date {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+        
+        /* Title */
+        h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+        
+        /* Effective Date */
+        .effective-date {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+        }
+        
+        .effective-date a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: underline;
+        }
+        
+        .effective-date a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Content */
+        .content {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            line-height: 1.75;
+        }
+        
+        .content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .content h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            letter-spacing: -0.01em;
+        }
+        
+        .content h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+        
+        .content ul, .content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .content li {
+            margin-bottom: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .content a {
+            color: #ffffff;
+            text-decoration: underline;
+            text-decoration-color: rgba(255, 255, 255, 0.3);
+            transition: text-decoration-color 0.2s;
+        }
+        
+        .content a:hover {
+            text-decoration-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .content strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .info-box p {
+            margin-bottom: 0.75rem;
+        }
+        
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-box ul {
+            margin-top: 0.75rem;
+            margin-bottom: 0;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 720px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 3rem 1.5rem 4rem;
+            }
+            
+            header {
+                padding: 1rem 1.5rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">News Aggregator</a>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="language-selector">
+            <select class="language-select">
+                <option value="en">English (United States)</option>
+            </select>
+        </div>
+
+        <div class="published-date">Published: 1 January 2026</div>
+
+        <h1>Privacy Policy</h1>
+
+        <div class="effective-date">
+            Effective: May 6, 2026 (<a href="#previous">Previous version</a>)
+        </div>
+
+        <div class="content">
+            <p>At News Aggregator, we prioritize your privacy and are committed to protecting your personal data. This Privacy Policy outlines how we collect, use, store, and safeguard your information when you interact with our platform.</p>
+
+            <p>By using our Services, you acknowledge that you have read and understood this Privacy Policy and our <a href="terms.html">Terms of Service</a>.</p>
+
+            <h2>1. Introduction</h2>
+            <p>We believe in transparency and user control. This policy explains your rights and our responsibilities regarding your personal information. This Privacy Policy applies to all users of News Aggregator, whether you access our Service through:</p>
+            <ul>
+                <li>Web browsers (desktop and mobile)</li>
+                <li>Direct URL access</li>
+                <li>Third-party authentication (Google Sign-In)</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Our Commitment:</strong> We practice data minimization and only collect information necessary to provide you with a personalized news experience. We do not sell, trade, or rent your personal information to third parties.</p>
+            </div>
+
+            <h2>2. Information We Collect</h2>
+            <p>We collect only the information necessary to provide you with a personalized news experience.</p>
+
+            <h3>Account Information</h3>
+            <p>When you register for an account, we collect:</p>
+            <ul>
+                <li><strong>Username:</strong> Your chosen display name (3-30 characters)</li>
+                <li><strong>Email Address:</strong> Must be a valid @gmail.com address for local registration</li>
+                <li><strong>Password:</strong> Securely hashed using bcrypt algorithm (we never store plaintext passwords)</li>
+                <li><strong>Security Question & Answer:</strong> Encrypted and used for account recovery</li>
+                <li><strong>Account Creation Date:</strong> Timestamp of registration</li>
+            </ul>
+
+            <h3>Google Authentication Data</h3>
+            <p>If you sign in using Google, we receive:</p>
+            <ul>
+                <li><strong>Email Address:</strong> Your verified Google email</li>
+                <li><strong>Profile Name:</strong> Used to generate your username</li>
+                <li><strong>Google User ID:</strong> Unique identifier for authentication</li>
+                <li><strong>Authentication Token:</strong> Provided by Google's secure OAuth 2.0 APIs</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Google Sign-In Security:</strong> We use Google's official Identity Services API with JWT validation. We do not have access to your Google password or any other Google account data beyond what is explicitly shared during the authentication process.</p>
+            </div>
+
+            <h3>Usage Data</h3>
+            <p>We may temporarily log non-personally identifiable information for security and analytics:</p>
+            <ul>
+                <li><strong>IP Address:</strong> For rate limiting and abuse prevention</li>
+                <li><strong>Browser Type & Version:</strong> For compatibility and optimization</li>
+                <li><strong>Device Information:</strong> Operating system and screen resolution</li>
+                <li><strong>Timestamp Data:</strong> When you access the Service</li>
+                <li><strong>Session Information:</strong> Login/logout times and session duration</li>
+                <li><strong>User Agent:</strong> For session validation and security</li>
+            </ul>
+
+            <h3>User Preferences</h3>
+            <ul>
+                <li><strong>Saved Articles:</strong> Articles you bookmark for later reading</li>
+                <li><strong>Category Preferences:</strong> Your preferred news categories</li>
+                <li><strong>UI Settings:</strong> Theme preferences and display options</li>
+            </ul>
+
+            <h2>3. How We Use Your Information</h2>
+            <p>Your data is used strictly for the following legitimate operational purposes:</p>
+
+            <h3>Authentication & Security</h3>
+            <ul>
+                <li>Verify your identity and maintain secure sessions</li>
+                <li>Prevent unauthorized access to your account</li>
+                <li>Detect and prevent fraudulent activity</li>
+                <li>Implement rate limiting to prevent abuse</li>
+                <li>Monitor for suspicious login attempts</li>
+            </ul>
+
+            <h3>Service Functionality</h3>
+            <ul>
+                <li>Provide personalized news feed based on your preferences</li>
+                <li>Save and retrieve your bookmarked articles</li>
+                <li>Remember your category and source filters</li>
+                <li>Maintain your UI preferences across sessions</li>
+            </ul>
+
+            <h3>Account Recovery</h3>
+            <ul>
+                <li>Facilitate password reset through security questions</li>
+                <li>Verify your identity during account recovery</li>
+                <li>Send account-related notifications (if implemented)</li>
+            </ul>
+
+            <h3>Platform Improvement</h3>
+            <ul>
+                <li>Analyze usage patterns to improve user experience</li>
+                <li>Optimize performance and fix bugs</li>
+                <li>Understand which features are most valuable</li>
+                <li>Ensure compatibility across devices and browsers</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>What We DON'T Do:</strong> We do NOT use your data for selling or renting to third parties, targeted advertising or marketing, profiling or behavioral tracking, sharing with data brokers, or any purpose not explicitly stated in this policy.</p>
+            </div>
+
+            <h2>4. Data Storage & Security</h2>
+            <p>We implement industry-standard security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction.</p>
+
+            <h3>Data Storage</h3>
+            <ul>
+                <li><strong>Database:</strong> MySQL database hosted on secure servers</li>
+                <li><strong>Location:</strong> Data is stored on InfinityFree hosting infrastructure</li>
+                <li><strong>Encryption at Rest:</strong> Database-level encryption for sensitive data</li>
+                <li><strong>Backup Policy:</strong> Regular automated backups for disaster recovery</li>
+            </ul>
+
+            <h3>Security Measures</h3>
+            <ul>
+                <li><strong>Password Hashing:</strong> Bcrypt algorithm with cost factor 12 (irreversible)</li>
+                <li><strong>Session Security:</strong> HTTPOnly and SameSite cookies to prevent XSS attacks</li>
+                <li><strong>Session Regeneration:</strong> New session IDs after login to prevent fixation</li>
+                <li><strong>Session Validation:</strong> IP address and User-Agent verification</li>
+                <li><strong>Rate Limiting:</strong> Protection against brute force attacks</li>
+                <li><strong>SQL Injection Prevention:</strong> Prepared statements with PDO</li>
+                <li><strong>XSS Protection:</strong> Input sanitization and output encoding</li>
+                <li><strong>HTTPS Enforcement:</strong> Encrypted data transmission (recommended)</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Security Limitations:</strong> While we implement robust security measures, no system is 100% secure. You are responsible for keeping your password confidential, using a strong unique password, logging out from shared devices, and reporting suspicious activity immediately.</p>
+            </div>
+
+            <h3>Data Retention</h3>
+            <p>We retain your personal data for as long as your account is active or as needed to provide services. Upon account deletion:</p>
+            <ul>
+                <li><strong>Immediately Deleted:</strong> Active session, saved preferences, bookmarks</li>
+                <li><strong>Retained for Security:</strong> Username, email, and OAuth identifiers (to prevent abuse)</li>
+                <li><strong>Retention Period:</strong> Security logs retained for 90 days</li>
+            </ul>
+
+            <h2>5. Third-Party Sharing & External Links</h2>
+            <p>We do not sell, trade, or rent your personal identification information to third parties. However, we work with certain service providers and external platforms:</p>
+
+            <h3>Google Identity Services</h3>
+            <p>When you use Google Sign-In:</p>
+            <ul>
+                <li>Google provides us with your email and profile information</li>
+                <li>We do not share your News Aggregator data back with Google</li>
+                <li>Google's Privacy Policy applies to their authentication service</li>
+                <li>You can revoke access anytime through your Google Account settings</li>
+            </ul>
+
+            <h3>News Content Providers</h3>
+            <p>When you click on a news article:</p>
+            <ul>
+                <li>You are redirected to the original publisher's website</li>
+                <li>The publisher's privacy policy applies to that visit</li>
+                <li>We are not responsible for third-party privacy practices</li>
+                <li>We do not track your activity on external sites</li>
+            </ul>
+
+            <h3>Hosting Provider</h3>
+            <ul>
+                <li><strong>Provider:</strong> InfinityFree</li>
+                <li><strong>Purpose:</strong> Website hosting and database storage</li>
+                <li><strong>Data Access:</strong> Infrastructure-level access only</li>
+                <li><strong>Their Policy:</strong> Subject to InfinityFree's terms and privacy policy</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>External Links:</strong> Our Service contains links to external websites. We are not responsible for the privacy practices or content of these third-party sites. We encourage you to read their privacy policies before providing any personal information.</p>
+            </div>
+
+            <h2>6. Your Privacy Rights & Data Control</h2>
+            <p>You retain full rights over your personal data. We provide you with tools to access, modify, and delete your information.</p>
+
+            <h3>Right to Access</h3>
+            <p>You have the right to:</p>
+            <ul>
+                <li>View your account information in the Profile section</li>
+                <li>Request a copy of all data we have about you</li>
+                <li>Know how your data is being used</li>
+            </ul>
+
+            <h3>Right to Rectification</h3>
+            <p>You can update your information through:</p>
+            <ul>
+                <li>Profile settings (username, email)</li>
+                <li>Security settings (password, security question)</li>
+                <li>Preferences (saved articles, categories)</li>
+            </ul>
+
+            <h3>Right to Deletion</h3>
+            <p>You can delete your account at any time through Settings. Upon deletion:</p>
+            <ul>
+                <li><strong>Immediately Removed:</strong> Active sessions, bookmarks, preferences, password</li>
+                <li><strong>Retained for Security:</strong> Username, email, OAuth ID (to prevent re-registration abuse)</li>
+                <li><strong>Retention Justification:</strong> Operational integrity, regulatory compliance, fraud prevention</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Data Retention Notice:</strong> Certain foundational records (username, email, authentication identifiers) may be retained after account deletion in accordance with industry standards for platform security and audit compliance. This prevents abuse through repeated account creation and helps us comply with legal obligations.</p>
+            </div>
+
+            <h3>Right to Data Portability</h3>
+            <p>You can request an export of your data in a machine-readable format (JSON/CSV) by contacting us.</p>
+
+            <h3>Right to Object</h3>
+            <p>You can object to certain data processing activities by:</p>
+            <ul>
+                <li>Disabling cookies in your browser</li>
+                <li>Opting out of analytics (if implemented)</li>
+                <li>Contacting us with specific concerns</li>
+            </ul>
+
+            <h2>7. Cookies & Tracking Technologies</h2>
+            <p>We use cookies and similar technologies to enhance your experience and maintain secure sessions.</p>
+
+            <h3>Session Cookies</h3>
+            <p>Essential cookies that keep you logged in:</p>
+            <ul>
+                <li><strong>Purpose:</strong> Maintain authenticated sessions</li>
+                <li><strong>Type:</strong> HTTPOnly, SameSite=Lax</li>
+                <li><strong>Duration:</strong> Session-based (deleted when browser closes)</li>
+                <li><strong>Required:</strong> Yes (cannot use Service without them)</li>
+            </ul>
+
+            <h3>Local Storage</h3>
+            <p>Browser storage for UI preferences:</p>
+            <ul>
+                <li><strong>Purpose:</strong> Save theme preferences, avatar selection</li>
+                <li><strong>Data Stored:</strong> Non-sensitive UI settings only</li>
+                <li><strong>Transmission:</strong> Never sent to our servers</li>
+                <li><strong>Control:</strong> Can be cleared through browser settings</li>
+            </ul>
+
+            <h3>Analytics Cookies</h3>
+            <p>Currently, we do NOT use:</p>
+            <ul>
+                <li>Google Analytics or similar tracking</li>
+                <li>Third-party advertising cookies</li>
+                <li>Social media tracking pixels</li>
+                <li>Cross-site tracking technologies</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Managing Cookies:</strong> You can control cookies through your browser settings. Blocking all cookies may prevent login functionality. Deleting cookies will log you out of the Service. Third-party cookies can be blocked without affecting our Service.</p>
+            </div>
+
+            <h2>8. Children's Privacy (COPPA Compliance)</h2>
+            <p>News Aggregator is committed to protecting the privacy of children and complying with the Children's Online Privacy Protection Act (COPPA).</p>
+
+            <h3>Age Restrictions</h3>
+            <ul>
+                <li><strong>Minimum Age:</strong> You must be at least 13 years old to use our Service</li>
+                <li><strong>Verification:</strong> We do not knowingly collect information from children under 13</li>
+                <li><strong>Parental Consent:</strong> Users aged 13-17 should have parental permission</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>If You Are Under 13:</strong> If you are under 13 years old, please do not use this Service or provide any personal information. If we discover that we have collected information from a child under 13, we will delete it immediately.</p>
+            </div>
+
+            <h3>For Parents & Guardians</h3>
+            <p>If you believe your child under 13 has provided us with personal information:</p>
+            <ul>
+                <li>Contact us immediately using the information in Section 11</li>
+                <li>We will delete the information within 48 hours</li>
+                <li>We will terminate the account if one was created</li>
+            </ul>
+
+            <h2>9. International Users & Data Transfers</h2>
+            <p>News Aggregator is hosted on servers that may be located in different jurisdictions. By using our Service, you consent to the transfer of your information to these locations.</p>
+
+            <h3>Data Transfer</h3>
+            <ul>
+                <li><strong>Hosting Location:</strong> InfinityFree servers (location may vary)</li>
+                <li><strong>Data Processing:</strong> May occur in different countries</li>
+                <li><strong>Protection:</strong> We ensure appropriate safeguards are in place</li>
+            </ul>
+
+            <h3>GDPR Compliance (EU Users)</h3>
+            <p>If you are located in the European Economic Area (EEA), you have additional rights under GDPR:</p>
+            <ul>
+                <li><strong>Legal Basis:</strong> Consent and legitimate interests</li>
+                <li><strong>Data Controller:</strong> News Aggregator (Ashish Gupta)</li>
+                <li><strong>Right to Complain:</strong> You can file a complaint with your local data protection authority</li>
+                <li><strong>Data Protection Officer:</strong> Contact information provided in Section 11</li>
+            </ul>
+
+            <h3>California Privacy Rights (CCPA)</h3>
+            <p>California residents have specific rights under CCPA:</p>
+            <ul>
+                <li>Right to know what personal information is collected</li>
+                <li>Right to delete personal information</li>
+                <li>Right to opt-out of sale (we don't sell data)</li>
+                <li>Right to non-discrimination for exercising rights</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>International Compliance:</strong> We strive to comply with privacy laws in all jurisdictions where our users are located. If you have specific concerns about data protection in your country, please contact us.</p>
+            </div>
+
+            <h2>10. Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors.</p>
+
+            <h3>Notification of Changes</h3>
+            <p>When we make changes, we will:</p>
+            <ul>
+                <li>Update the "Last Updated" date at the top of this page</li>
+                <li>Provide at least 30 days' notice for material changes</li>
+                <li>Notify registered users via email (if email notifications are enabled)</li>
+                <li>Display a prominent notice on the Service</li>
+            </ul>
+
+            <h3>Your Acceptance</h3>
+            <p>By continuing to use the Service after changes become effective, you accept the updated Privacy Policy. If you do not agree with the changes:</p>
+            <ul>
+                <li>Stop using the Service</li>
+                <li>Delete your account through Settings</li>
+                <li>Contact us with concerns before the changes take effect</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Version History:</strong> We maintain a history of significant changes to this Privacy Policy. You can request previous versions by contacting us.</p>
+            </div>
+
+            <h3>Regular Review</h3>
+            <p>We encourage you to review this Privacy Policy periodically to stay informed about how we protect your information. We recommend checking this page:</p>
+            <ul>
+                <li>Before providing new personal information</li>
+                <li>After receiving a notification of changes</li>
+                <li>At least once every 6 months</li>
+            </ul>
+
+            <h2>11. Contact Us & Data Protection</h2>
+            <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us through the following channels:</p>
+
+            <div class="info-box">
+                <p><strong>Contact Information:</strong></p>
+                <ul>
+                    <li><strong>Developer:</strong> Ashish Gupta</li>
+                    <li><strong>Portfolio:</strong> <a href="https://bitcodeashishcloud.github.io/Ashish-Gupta" target="_blank">Visit Portfolio</a></li>
+                    <li><strong>GitHub:</strong> <a href="https://github.com/bitcodeAShishcloud" target="_blank">@bitcodeAShishcloud</a></li>
+                    <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ashish-gupta-037973259/" target="_blank">Ashish Gupta</a></li>
+                    <li><strong>Response Time:</strong> We aim to respond within 48-72 business hours</li>
+                </ul>
+            </div>
+
+            <h3>What to Include in Your Request</h3>
+            <p>When contacting us about privacy matters, please include:</p>
+            <ul>
+                <li>Your username or email address</li>
+                <li>Nature of your request (access, deletion, correction, etc.)</li>
+                <li>Specific information you're inquiring about</li>
+                <li>Any relevant account details for verification</li>
+            </ul>
+
+            <h3>Data Protection Officer</h3>
+            <p>For GDPR-related inquiries or data protection concerns:</p>
+            <ul>
+                <li><strong>Role:</strong> Data Protection Contact</li>
+                <li><strong>Responsibility:</strong> Handling privacy requests and compliance</li>
+                <li><strong>Contact:</strong> Use the channels listed above with subject "Data Protection"</li>
+            </ul>
+
+            <h3>Security Incidents</h3>
+            <p>If you discover a security vulnerability or data breach:</p>
+            <ul>
+                <li>Mark your communication as "URGENT - SECURITY"</li>
+                <li>Provide detailed information about the issue</li>
+                <li>Do not publicly disclose the vulnerability</li>
+                <li>We will respond within 24 hours for security matters</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Response Timeline:</strong> We are committed to addressing your privacy concerns promptly. General inquiries: 48-72 hours. Data requests: Within 30 days (as required by law). Security issues: Within 24 hours. Urgent matters: Same business day when possible.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p>&copy; 2026 News Aggregator. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">Your privacy matters to us. We are committed to protecting your personal information.</p>
+        </div>
+    </footer>
+</body>
+</html>

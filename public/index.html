@@ -1,46 +1,2132 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Aggregator</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>News Aggregator - Premium Edition | Latest News from Top Sources</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Stay updated with the latest news from top sources worldwide. Browse articles across categories like Technology, Business, Sports, Health, Entertainment and more.">
+    <meta name="keywords"
+        content="news, aggregator, latest news, top news, world news, technology, business, sports, health, entertainment, breaking news">
+    <meta name="author" content="Ashish Gupta">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://news-aggregator.rf.gd/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://news-aggregator.rf.gd/">
+    <meta property="og:title" content="News Aggregator - Premium Edition">
+    <meta property="og:description"
+        content="Stay updated with the latest news from top sources worldwide. Browse Technology, Business, Sports, Health, Entertainment and more.">
+    <meta property="og:image" content="https://news-aggregator.rf.gd/og-preview.png">
+    <meta property="og:site_name" content="News Aggregator">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="News Aggregator - Premium Edition">
+    <meta name="twitter:description"
+        content="Stay updated with the latest news from top sources worldwide. Browse Technology, Business, Sports, Health, Entertainment and more.">
+    <meta name="twitter:image" content="https://news-aggregator.rf.gd/og-preview.png">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0a0e27">
+    <meta name="msapplication-TileColor" content="#0a0e27">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='brandGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3Cfilter id='dropShadow' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeDropShadow dx='0' dy='2' stdDeviation='4' flood-color='%23000000' flood-opacity='0.4'/%3E%3C/filter%3E%3C/defs%3E%3Ctext x='50%25' y='54%25' font-family='Georgia, %22Times New Roman%22, serif' font-size='85' font-weight='bold' fill='url(%23brandGrad)' filter='url(%23dropShadow)' text-anchor='middle' dominant-baseline='middle'%3EN%3C/text%3E%3C/svg%3E">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css?v=1.4121">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- FOUC Prevention: Apply theme instantly before paint -->
+    <script>
+        (function () {
+            var m = localStorage.getItem('themeMode') || localStorage.getItem('theme') || 'system';
+            var t = m;
+            if (m === 'system') t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            if (t === 'light') {
+                document.documentElement.classList.add('light-theme');
+            }
+        })();
+    </script>
+
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "News Aggregator",
+        "url": "https://news-aggregator.rf.gd/",
+        "description": "Premium news aggregator delivering the latest articles from top sources worldwide.",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://news-aggregator.rf.gd/?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Ashish Gupta",
+            "url": "https://bitcodeashishcloud.github.io/Ashish-Gupta"
+        }
+    }
+    </script>
 </head>
+
 <body>
-    <header>
-        <h1>News Aggregator</h1>
-        <nav>
-            <a href="#" onclick="showSection('news-feed')">Home</a>
-            <a href="#" onclick="showSection('login-form')">Login</a>
-            <a href="#" onclick="showSection('register-form')">Register</a>
+    <style>
+        /* Onboarding Tip */
+        .onboarding-tip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 12px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+            z-index: 1000;
+            animation: bounceTip 2s infinite;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tip-arrow {
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid #3b82f6;
+        }
+
+        @keyframes bounceTip {
+
+            0%,
+            100% {
+                transform: translate(-50%, 0);
+            }
+
+            50% {
+                transform: translate(-50%, 5px);
+            }
+        }
+
+        .pulse-nav {
+            animation: navPulse 2s infinite;
+            position: relative;
+        }
+
+        @keyframes navPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+                border-radius: 8px;
+                background: rgba(59, 130, 246, 0.1);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+                border-radius: 8px;
+                background: rgba(59, 130, 246, 0.2);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+                border-radius: 8px;
+                background: transparent;
+            }
+        }
+    </style>
+    <!-- Google Auth Initialization -->
+    <div id="g_id_onload" data-client_id="709580858199-cbpc0mlfrmko7p64bm7c0h5jgq4q3sl6.apps.googleusercontent.com"
+        data-context="signin" data-ux_mode="popup" data-callback="handleGoogleLogin" data-auto_prompt="false">
+    </div>
+    <header class="figma-header">
+        <div class="header-left">
+            <div class="logo-group">
+                <div class="logo-icon">NEWS</div>
+                <h1 class="logo-text">Aggregator</h1>
+            </div>
+            <span class="logo-subtitle mobile-only">Stay informed. Stay ahead.</span>
+        </div>
+
+        <nav class="header-center" id="main-nav">
+            <a href="#" class="nav-link active" onclick="showSection('news-feed', this); return false;">For You</a>
+            <a href="#" class="nav-link" id="my-feed-link"
+                onclick="showPersonalizedFeed(this); return false;">Following</a>
+            <a href="#" class="nav-link"
+                onclick="alert('Explore is coming soon!'); updateNavIndicator(this); return false;">Explore</a>
+            <div class="nav-indicator" id="nav-indicator"></div>
         </nav>
+        <!-- Onboarding Tip -->
+        <div id="my-feed-tip" class="onboarding-tip" style="display:none;">
+            <div class="tip-arrow"></div>
+            <div class="tip-content">
+                <i class="fas fa-magic" style="color: #fbbf24;"></i>
+                Your personalized feed is here!
+            </div>
+        </div>
+        </nav>
+
+        <div class="header-right">
+            <div class="search-container" style="position: relative;">
+                <button class="icon-btn search-btn"
+                    onclick="document.getElementById('search-dropdown').classList.toggle('show'); document.getElementById('search-input').focus();">
+                    <i class="fas fa-search"></i>
+                </button>
+                <div class="search-dropdown" id="search-dropdown">
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="search-input" placeholder="Search articles..." onkeyup="filterNews()">
+                    </div>
+                </div>
+            </div>
+            <button class="icon-btn theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()"
+                title="Toggle Light/Dark Mode">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+
+            <div class="auth-links" id="auth-links-container">
+                <button class="sign-in-btn" id="login-link" onclick="openAuthModal()">Sign In</button>
+                <a href="#" id="register-link" style="display:none;"></a>
+            </div>
+
+            <div class="user-menu" id="user-menu" style="display: none;">
+                <button class="profile-btn" onclick="toggleProfileDropdown()">
+                    <div class="avatar" id="user-avatar"></div>
+                    <span id="username-display"></span>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                </button>
+                <div class="profile-dropdown" id="profile-dropdown">
+                    <div class="dropdown-header" onclick="openProfileModal()">
+                        <div class="avatar large" id="dropdown-avatar"></div>
+                        <div class="user-info">
+                            <span class="name" id="dropdown-username"></span>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" onclick="showSavedArticles(); toggleProfileDropdown()" class="saved-articles-link">
+                        <i class="fas fa-bookmark" style="color: #f59e0b;"></i> Saved Articles
+                        <span class="saved-count-badge" id="saved-count-badge" style="display:none;">0</span>
+                    </a>
+                    <a href="#" onclick="openPersonalizationModal(); toggleProfileDropdown()"><i
+                            class="fas fa-chart-pie"></i> Personalization</a>
+                    <a href="#" onclick="openProfileModal()"><i class="far fa-user-circle"></i> Profile</a>
+                    <a href="#" onclick="openSettingsModal()"><i class="fas fa-cog"></i> Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" onclick="logout()" class="logout-link"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation links -->
+        <div class="nav-links mobile-nav" id="nav-links" style="display:none;">
+            <a href="#" onclick="showSection('news-feed'); closeMobileMenu()">For You</a>
+            <a href="#" onclick="showPersonalizedFeed(); closeMobileMenu()">Following</a>
+            <a href="#" onclick="alert('Explore is coming soon!'); closeMobileMenu()">Explore</a>
+        </div>
     </header>
     <main>
+        <!-- Figma Hero Section -->
+        <section class="hero-section" id="hero-section" style="display: none; min-height: 400px;">
+            <!-- Content loaded dynamically from app.js -->
+        </section>
+
         <section id="news-feed">
+            <div class="section-header"
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; position: relative;">
+                <h2 class="section-title" style="margin-bottom: 0;">Latest for you</h2>
+                <div class="filter-container">
+                    <button id="main-filter-btn" class="filter-main-btn"
+                        onclick="document.getElementById('filter-dropdown').classList.toggle('show');">
+                        <i class="fas fa-sliders-h"></i> Filter
+                    </button>
+                    <div class="search-dropdown filter-dropdown" id="filter-dropdown">
+                        <div class="custom-select" id="category-custom-select">
+                            <div class="select-trigger" onclick="toggleCustomSelect('category-options')">
+                                <i class="fas fa-folder select-icon"></i>
+                                <span id="category-display">All Categories</span>
+                                <i class="fas fa-chevron-down arrow"></i>
+                            </div>
+                            <div class="options-list" id="category-options">
+                                <div class="option active"
+                                    onclick="selectCustomOption('category', '', 'All Categories', 'fa-folder')">
+                                    <i class="fas fa-folder"></i> All Categories
+                                </div>
+                                <div class="option"
+                                    onclick="selectCustomOption('category', 'top', 'Top News', 'fa-fire')">
+                                    <i class="fas fa-fire"></i> Top News
+                                </div>
+                                <div class="option"
+                                    onclick="selectCustomOption('category', 'world', 'World', 'fa-globe')">
+                                    <i class="fas fa-globe"></i> World
+                                </div>
+                                <div class="option"
+                                    onclick="selectCustomOption('category', 'politics', 'Politics', 'fa-landmark')">
+                                    <i class="fas fa-landmark"></i> Politics
+                                </div>
+                                <div class="option"
+                                    onclick="selectCustomOption('category', 'business', 'Business', 'fa-briefcase')">
+                                    <i class="fas fa-briefcase"></i> Business
+                                </div>
+                                <div class="option"
+                                    onclick="selectCustomOption('category', 'technology', 'Technology', 'fa-microchip')">
+                                    <i class="fas fa-microchip"></i> Technology
+                                </div>
+                                <div class="option"
+                                    onclick="selectCustomOption('category', 'science', 'Science', 'fa-flask')">
+                                    <i class="fas fa-flask"></i> Science
+                                </div>
+                                <div class="option"
+                                    onclick="selectCustomOption('category', 'health', 'Health', 'fa-heartbeat')">
+                                    <i class="fas fa-heartbeat"></i> Health
+                                </div>
+                                <div class="option"
+                                    onclick="selectCustomOption('category', 'sports', 'Sports', 'fa-trophy')">
+                                    <i class="fas fa-trophy"></i> Sports
+                                </div>
+                                <div class="option"
+                                    onclick="selectCustomOption('category', 'entertainment', 'Entertainment', 'fa-film')">
+                                    <i class="fas fa-film"></i> Entertainment
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="custom-select" id="source-custom-select">
+                            <div class="select-trigger" onclick="toggleCustomSelect('source-options')">
+                                <i class="fas fa-globe select-icon"></i>
+                                <span id="source-display">All Sources</span>
+                                <i class="fas fa-chevron-down arrow"></i>
+                            </div>
+                            <div class="options-list" id="source-options">
+                                <!-- Populated dynamically -->
+                                <div class="option active"
+                                    onclick="selectCustomOption('source', '', 'All Sources', 'fa-globe')">
+                                    <i class="fas fa-globe"></i> All Sources
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
             <!-- News articles will be loaded here -->
-        </section>
-        <section id="login-form" style="display:none;">
-            <h2>Login</h2>
-            <form method="POST" action="auth.php">
-                <input type="hidden" name="action" value="login">
-                <label>Username:<br><input type="text" name="username" required></label><br>
-                <label>Password:<br><input type="password" name="password" required></label><br>
-                <button type="submit">Login</button>
-            </form>
-        </section>
-        <section id="register-form" style="display:none;">
-            <h2>Register</h2>
-            <form method="POST" action="auth.php">
-                <input type="hidden" name="action" value="register">
-                <label>Username:<br><input type="text" name="username" required></label><br>
-                <label>Password:<br><input type="password" name="password" required></label><br>
-                <button type="submit">Register</button>
-            </form>
+            <div id="articles-container"></div>
+            <!-- Show More button will be inserted here dynamically -->
         </section>
     </main>
     <footer>
-        <p>&copy; 2026 News Aggregator</p>
     </footer>
-    <script src="app.js"></script>
+
+    <!-- ===== UNIFIED AUTH MODAL ===== -->
+    <div id="authModal" class="auth-modal-overlay" onclick="handleAuthOverlayClick(event)">
+        <div class="auth-modal-card" id="authModalCard">
+            <!-- LOGO -->
+            <div class="auth-modal-logo">
+                <i class="fas fa-newspaper"></i>
+                <span>News Aggregator</span>
+            </div>
+
+            <!-- STEP 1: Entry (Google + Email) -->
+            <div class="auth-step" id="auth-step-entry">
+                <h2 class="auth-modal-title">Welcome</h2>
+                <p class="auth-modal-sub">Sign in to your account or create a new one</p>
+
+                <!-- Google Button -->
+                <div class="auth-google-wrap">
+                    <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="filled_black"
+                        data-text="continue_with" data-size="large" data-logo_alignment="left" data-width="340"></div>
+                </div>
+
+                <div class="auth-divider"><span>or continue with email</span></div>
+
+                <div class="auth-input-group">
+                    <label for="auth-email">Email address</label>
+                    <input type="email" id="auth-email" placeholder="name@gmail.com"
+                        onkeydown="if(event.key==='Enter') checkEmailAndProceed()">
+                </div>
+                <div class="auth-error" id="auth-error-entry"></div>
+                <button class="auth-modal-btn" id="auth-email-continue-btn" onclick="checkEmailAndProceed()">
+                    <span>Continue</span>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                    </svg>
+                </button>
+                <p class="auth-modal-terms">By continuing, you agree to our <a href="terms.html">Terms</a> &amp; <a
+                        href="privacy.html">Privacy Policy</a></p>
+                <div style="text-align:center; margin-top:1.5rem;">
+                    <a href="#" onclick="closeAuthModal(); document.getElementById('settingsModal').style.display='flex'; switchSettingsTab('help');" style="color:#94a3b8; font-size:0.85rem; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; padding:0.4rem 1rem; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); border-radius:20px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.08)'; this.style.color='#fff';" onmouseout="this.style.background='rgba(255,255,255,0.03)'; this.style.color='#94a3b8';">
+                        <i class="fas fa-headset"></i> Need Help?
+                    </a>
+                </div>
+            </div>
+
+            <!-- STEP 2a: Sign In (password) -->
+            <div class="auth-step" id="auth-step-signin" style="display:none;">
+                <button class="auth-back-btn" onclick="authGoBack()">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <path d="M19 12H5" />
+                        <path d="m12 19-7-7 7-7" />
+                    </svg>
+                    Back
+                </button>
+                <h2 class="auth-modal-title">Welcome back</h2>
+                <p class="auth-modal-sub" id="signin-email-label"></p>
+                <div class="auth-input-group">
+                    <label for="auth-password">Password</label>
+                    <div class="auth-pw-wrap">
+                        <input type="password" id="auth-password" placeholder="Your password"
+                            onkeydown="if(event.key==='Enter') submitSignIn()">
+                        <button type="button" class="auth-eye-btn" onclick="toggleAuthPassword('auth-password', this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="auth-error" id="auth-error-signin"></div>
+                <button class="auth-modal-btn" onclick="submitSignIn()">
+                    <span>Sign In</span>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                    </svg>
+                </button>
+                <p class="auth-modal-forgot"><a href="#"
+                        onclick="closeAuthModal(); showSection('forgot-password')">Forgot password?</a></p>
+            </div>
+
+            <!-- STEP 2b: Google-only account notice -->
+            <div class="auth-step" id="auth-step-google-only" style="display:none;">
+                <button class="auth-back-btn" onclick="authGoBack()">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <path d="M19 12H5" />
+                        <path d="m12 19-7-7 7-7" />
+                    </svg>
+                    Back
+                </button>
+                <h2 class="auth-modal-title">Use Google to sign in</h2>
+                <p class="auth-modal-sub">This account was created with Google. Please use the Google button to sign in.
+                </p>
+                <div class="auth-google-wrap" style="margin-top:1.5rem;">
+                    <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="filled_black"
+                        data-text="signin_with" data-size="large" data-logo_alignment="left" data-width="340"></div>
+                </div>
+            </div>
+
+            <!-- STEP 2c: Sign Up -->
+            <div class="auth-step" id="auth-step-signup" style="display:none;">
+                <button class="auth-back-btn" onclick="authGoBack()">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <path d="M19 12H5" />
+                        <path d="m12 19-7-7 7-7" />
+                    </svg>
+                    Back
+                </button>
+                <h2 class="auth-modal-title">Create account</h2>
+                <p class="auth-modal-sub" id="signup-email-label"></p>
+                <div class="auth-input-group">
+                    <label for="auth-username">Username</label>
+                    <input type="text" id="auth-username" placeholder="Choose a username" minlength="3" maxlength="30">
+                    <span class="auth-hint">3-30 chars: letters, numbers, _ or -</span>
+                </div>
+                <div class="auth-input-group">
+                    <label for="auth-signup-password">Password</label>
+                    <div class="auth-pw-wrap">
+                        <input type="password" id="auth-signup-password" placeholder="Create a strong password"
+                            minlength="8" oninput="checkPasswordStrengthModal(this.value)">
+                        <button type="button" class="auth-eye-btn"
+                            onclick="toggleAuthPassword('auth-signup-password', this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="auth-strength-bar">
+                        <div id="auth-strength-fill"></div>
+                    </div>
+                    <span id="auth-strength-text" class="auth-hint">Min 8 chars, 1 uppercase, 1 lowercase, 1
+                        number</span>
+                </div>
+                <div class="auth-input-group">
+                    <label for="auth-confirm-password">Confirm Password</label>
+                    <div class="auth-pw-wrap">
+                        <input type="password" id="auth-confirm-password" placeholder="Re-enter password" minlength="8">
+                        <button type="button" class="auth-eye-btn"
+                            onclick="toggleAuthPassword('auth-confirm-password', this)">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="auth-input-group">
+                    <label for="auth-security-question">Security Question</label>
+                    <select id="auth-security-question">
+                        <option value="" disabled selected>Choose a question</option>
+                        <option value="pet">What is the name of your first pet?</option>
+                        <option value="city">In which city were you born?</option>
+                        <option value="school">What was the name of your first school?</option>
+                        <option value="food">What is your favorite food?</option>
+                        <option value="movie">What is your all-time favorite movie?</option>
+                        <option value="friend">What is the name of your childhood best friend?</option>
+                    </select>
+                </div>
+                <div class="auth-input-group">
+                    <label for="auth-security-answer">Your Answer</label>
+                    <input type="text" id="auth-security-answer" placeholder="Your answer (used to recover password)">
+                </div>
+                <div class="auth-error" id="auth-error-signup"></div>
+                <button class="auth-modal-btn" onclick="submitSignUp()">
+                    <span>Create Account</span>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FORGOT PASSWORD (kept as section for backward compat) ===== -->
+    <section id="forgot-password" style="display:none;">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header"><i class="fas fa-unlock-alt"></i>
+                    <h2>Reset Password</h2>
+                    <p>Verify your identity to reset your password</p>
+                </div>
+                <div class="forgot-steps">
+                    <div class="step active" id="step-ind-1"><span>1</span> Username</div>
+                    <div class="step-line"></div>
+                    <div class="step" id="step-ind-2"><span>2</span> Verify</div>
+                    <div class="step-line"></div>
+                    <div class="step" id="step-ind-3"><span>3</span> Reset</div>
+                </div>
+                <div class="forgot-step" id="forgot-step-1">
+                    <div class="form-group"><label for="forgot-username"><i class="fas fa-user"></i> Username or
+                            Email</label>
+                        <input type="text" id="forgot-username" placeholder="Enter your registered username or email"
+                            required>
+                    </div>
+                    <button type="button" class="auth-btn" onclick="forgotStep1()"><i class="fas fa-arrow-right"></i>
+                        Next</button>
+                    <div id="forgot-error-1" class="forgot-error" style="display:none;"></div>
+                </div>
+                <div class="forgot-step" id="forgot-step-2" style="display:none;">
+                    <div class="forgot-info"><i class="fas fa-shield-alt"></i><span
+                            id="forgot-question-text">Loading...</span></div>
+                    <div class="form-group"><label for="forgot-answer"><i class="fas fa-comment-dots"></i> Your
+                            Answer</label>
+                        <input type="text" id="forgot-answer" placeholder="Enter your security answer" required>
+                    </div>
+                    <button type="button" class="auth-btn" onclick="forgotStep2()"><i class="fas fa-check"></i>
+                        Verify</button>
+                    <div id="forgot-error-2" class="forgot-error" style="display:none;"></div>
+                </div>
+                <div class="forgot-step" id="forgot-step-3" style="display:none;">
+                    <div class="form-group"><label for="forgot-new-password"><i class="fas fa-key"></i> New
+                            Password</label>
+                        <div class="password-wrapper"><input type="password" id="forgot-new-password"
+                                placeholder="New password" required minlength="8">
+                            <button type="button" class="toggle-password"
+                                onclick="togglePasswordVisibility('forgot-new-password',this)" aria-label="Toggle"><svg
+                                    viewBox="0 0 24 24">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg></button>
+                        </div>
+                    </div>
+                    <div class="form-group"><label for="forgot-confirm-password"><i class="fas fa-lock"></i> Confirm
+                            Password</label>
+                        <div class="password-wrapper"><input type="password" id="forgot-confirm-password"
+                                placeholder="Re-enter password" required minlength="8">
+                            <button type="button" class="toggle-password"
+                                onclick="togglePasswordVisibility('forgot-confirm-password',this)"
+                                aria-label="Toggle"><svg viewBox="0 0 24 24">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg></button>
+                        </div>
+                    </div>
+                    <button type="button" class="auth-btn" onclick="forgotStep3()"><i class="fas fa-save"></i> Reset
+                        Password</button>
+                    <div id="forgot-error-3" class="forgot-error" style="display:none;"></div>
+                </div>
+                <div class="auth-footer">
+                    <p>Remember your password? <a href="#" onclick="showSection('news-feed'); openAuthModal()">Back to
+                            Login</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide Modal -->
+    <div id="guideModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeGuideModal()">&times;</span>
+            <div class="modal-header">
+                <i class="fas fa-book"></i>
+                <h2>User Guide</h2>
+            </div>
+            <div class="modal-body">
+                <div class="guide-section">
+                    <h3><i class="fas fa-home"></i> Home / News Feed</h3>
+                    <p>Browse the latest news articles from various sources. Use the search bar and filters to find
+                        specific content.</p>
+                </div>
+
+                <div class="guide-section">
+                    <h3><i class="fas fa-search"></i> Search & Filter</h3>
+                    <ul>
+                        <li><strong>Search:</strong> Type keywords to find articles</li>
+                        <li><strong>Category Filter:</strong> Filter by Top News, World, Politics, Business, Technology,
+                            Science, Health, Sports, Entertainment</li>
+                        <li><strong>Source Filter:</strong> Filter by news source (sorted alphabetically)</li>
+
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h3><i class="fas fa-user-plus"></i> Registration</h3>
+                    <p>Create an account to personalize your news experience:</p>
+                    <ul>
+                        <li>Click "Register" in the navigation</li>
+                        <li>Choose a username and create a secure password</li>
+                        <li><strong>Note:</strong> A valid <code>@gmail.com</code> address is required for local
+                            registration</li>
+                        <li>Alternatively, use <strong>Sign in with Google</strong> for instant 1-click registration!
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h3><i class="fas fa-sign-in-alt"></i> Login</h3>
+                    <p>Access your account securely:</p>
+                    <ul>
+                        <li>Click "Login" in the navigation</li>
+                        <li>Enter your <strong>username</strong> or your registered <strong>email address</strong></li>
+                        <li>Or use <strong>Sign in with Google</strong> for faster access</li>
+                        <li>Your profile avatar will appear in the premium header dropdown after login</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h3><i class="fas fa-newspaper"></i> Reading Articles</h3>
+                    <ul>
+                        <li>Click on article titles or "Read Full Article" to open in new tab</li>
+                        <li>View article images, source, and publication date</li>
+                        <li>Category badges show article topics</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h3><i class="fas fa-mobile-alt"></i> Mobile Experience</h3>
+                    <p>The News Aggregator is fully responsive and works great on all devices - desktop, tablet, and
+                        mobile.</p>
+                </div>
+
+                <div class="guide-section"
+                    style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <h3><i class="fas fa-gavel"></i> Legal & Policies</h3>
+                    <p>By using this platform, you agree to our policies. Please review them here:</p>
+                    <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                        <a href="terms.html" style="color: #64b5f6; text-decoration: none;"><i
+                                class="far fa-file-alt"></i> Terms of Service</a>
+                        <a href="privacy.html" style="color: #64b5f6; text-decoration: none;"><i
+                                class="fas fa-info-circle"></i> Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Onboarding Modal -->
+    <style>
+        .ob-category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .ob-chip {
+            cursor: pointer;
+            display: block;
+        }
+
+        .ob-chip input[type="checkbox"] {
+            display: none;
+        }
+
+        .ob-chip-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+            user-select: none;
+        }
+
+        .ob-chip:hover .ob-chip-content {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(100, 181, 246, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .ob-chip input[type="checkbox"]:checked+.ob-chip-content {
+            background: linear-gradient(135deg, rgba(66, 165, 245, 0.2), rgba(100, 181, 246, 0.1));
+            border-color: #64b5f6;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(100, 181, 246, 0.2);
+        }
+
+        .ob-chip input[type="checkbox"]:checked+.ob-chip-content i {
+            color: #64b5f6;
+        }
+    </style>
+    <div id="onboardingModal" class="modal"
+        style="z-index: 10000; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);">
+        <div class="modal-content"
+            style="max-width: 550px; background: linear-gradient(145deg, #1e293b, #0f172a); border: 1px solid rgba(100, 181, 246, 0.2); border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);">
+            <div class="modal-header" style="justify-content: center; border-bottom: none; padding-bottom: 0.5rem;">
+                <h2
+                    style="color: #64b5f6; font-size: 1.8rem; font-weight: 800; display:flex; align-items:center; gap:10px;">
+                    Welcome! 🎉</h2>
+            </div>
+            <div class="modal-body" style="text-align: center; padding-top: 0;">
+                <p style="color: #94a3b8; font-size: 1rem; margin-bottom: 2rem;">Select at least 3 topics you care about
+                    to personalize your news feed.</p>
+                <div class="ob-category-grid">
+                    <label class="ob-chip"><input type="checkbox" value="Top News">
+                        <div class="ob-chip-content"><i class="fas fa-fire"></i> Top News</div>
+                    </label>
+                    <label class="ob-chip"><input type="checkbox" value="World">
+                        <div class="ob-chip-content"><i class="fas fa-globe"></i> World</div>
+                    </label>
+                    <label class="ob-chip"><input type="checkbox" value="Politics">
+                        <div class="ob-chip-content"><i class="fas fa-landmark"></i> Politics</div>
+                    </label>
+                    <label class="ob-chip"><input type="checkbox" value="Business">
+                        <div class="ob-chip-content"><i class="fas fa-briefcase"></i> Business</div>
+                    </label>
+                    <label class="ob-chip"><input type="checkbox" value="Technology">
+                        <div class="ob-chip-content"><i class="fas fa-laptop-code"></i> Technology</div>
+                    </label>
+                    <label class="ob-chip"><input type="checkbox" value="Science">
+                        <div class="ob-chip-content"><i class="fas fa-flask"></i> Science</div>
+                    </label>
+                    <label class="ob-chip"><input type="checkbox" value="Health">
+                        <div class="ob-chip-content"><i class="fas fa-heartbeat"></i> Health</div>
+                    </label>
+                    <label class="ob-chip"><input type="checkbox" value="Sports">
+                        <div class="ob-chip-content"><i class="fas fa-trophy"></i> Sports</div>
+                    </label>
+                    <label class="ob-chip"><input type="checkbox" value="Entertainment">
+                        <div class="ob-chip-content"><i class="fas fa-film"></i> Entertainment</div>
+                    </label>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
+                    <button class="auth-btn" id="btn-onboarding-skip" onclick="skipOnboarding()"
+                        style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); width: auto; padding: 0.8rem 1.5rem;">Skip
+                        for now</button>
+                    <button class="auth-btn" id="btn-onboarding-save" onclick="saveOnboarding()" disabled
+                        style="width: auto; padding: 0.8rem 2.5rem; font-weight: 700; font-size: 1.05rem;">Personalize
+                        My Feed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeAboutModal()">&times;</span>
+            <div class="modal-header">
+                <i class="fas fa-info-circle"></i>
+                <h2>About</h2>
+            </div>
+            <div class="modal-body">
+                <div class="about-hero">
+                    <div class="about-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>News Aggregator</h3>
+                    <p class="about-tagline">Your Premium Source for Curated News</p>
+                </div>
+
+                <div class="about-section">
+                    <h4><i class="fas fa-star"></i> Features</h4>
+                    <ul>
+                        <li>Real-time news aggregation from multiple sources</li>
+                        <li>Secure 1-click <strong>Google OAuth 2.0</strong> Login</li>
+                        <li>Premium Profile Dropdown with personalized avatars</li>
+                        <li>Advanced search and filtering capabilities</li>
+                        <li>Responsive design for all devices</li>
+                        <li>Premium UI with smooth animations and dark theme</li>
+                    </ul>
+                </div>
+
+                <div class="about-section">
+                    <h4><i class="fas fa-palette"></i> Technology Stack</h4>
+                    <ul>
+                        <li><strong>Frontend:</strong> HTML5, CSS3, Vanilla JavaScript</li>
+                        <li><strong>Backend:</strong> PHP (PDO)</li>
+                        <li><strong>Database:</strong> MySQL</li>
+                        <li><strong>Authentication:</strong> Google Identity Services API, BCrypt</li>
+                        <li><strong>Icons:</strong> Font Awesome</li>
+                    </ul>
+                </div>
+
+                <div class="about-developer">
+                    <h4><i class="fas fa-user-tie"></i> Developer</h4>
+                    <div class="developer-card">
+                        <div class="developer-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="developer-info">
+                            <h5>👨‍💻 Ashish Gupta</h5>
+                            <p class="developer-title">Full Stack Developer</p>
+                            <div class="developer-links">
+                                <a href="https://bitcodeashishcloud.github.io/Ashish-Gupta" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <i class="fas fa-globe"></i> Portfolio
+                                </a>
+                                <a href="https://github.com/bitcodeAShishcloud" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                                <a href="https://www.linkedin.com/in/ashish-gupta-037973259/" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <i class="fab fa-linkedin"></i> LinkedIn
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-footer">
+                    <p><i class="fas fa-heart"></i> Built with passion for delivering quality news experience</p>
+                    <p class="version">Version 1.0.0 | &copy; 2026</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="app.js?v=1.7005"></script>
+    <script>
+        // Password visibility toggle (SVG)
+        const eyeOpenSVG = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+        const eyeOffSVG = '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+
+        function togglePasswordVisibility(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const svg = btn.querySelector('svg');
+            if (input.type === 'password') {
+                input.type = 'text';
+                svg.innerHTML = eyeOffSVG;
+            } else {
+                input.type = 'password';
+                svg.innerHTML = eyeOpenSVG;
+            }
+        }
+
+        // Password strength checker
+        function checkPasswordStrength(password) {
+            const bar = document.getElementById('strength-bar');
+            const text = document.getElementById('strength-text');
+            let score = 0;
+
+            if (password.length >= 6) score++;
+            if (password.length >= 10) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+
+            const levels = [
+                { width: '0%', color: 'transparent', label: '' },
+                { width: '20%', color: '#ef4444', label: 'Very Weak' },
+                { width: '40%', color: '#f97316', label: 'Weak' },
+                { width: '60%', color: '#eab308', label: 'Fair' },
+                { width: '80%', color: '#22c55e', label: 'Strong' },
+                { width: '100%', color: '#10b981', label: 'Very Strong' }
+            ];
+
+            const level = levels[score] || levels[0];
+            bar.style.width = level.width;
+            bar.style.background = level.color;
+            text.textContent = level.label;
+            text.style.color = level.color;
+        }
+
+        // Confirm password match check
+        const confirmInput = document.getElementById('register-confirm-password');
+        if (confirmInput) {
+            confirmInput.addEventListener('input', function () {
+                const pw = document.getElementById('register-password').value;
+                const hint = document.getElementById('password-match-hint');
+                if (this.value === '') {
+                    hint.textContent = '';
+                } else if (this.value === pw) {
+                    hint.textContent = '✓ Passwords match';
+                    hint.style.color = '#10b981';
+                } else {
+                    hint.textContent = '✗ Passwords do not match';
+                    hint.style.color = '#ef4444';
+                }
+            });
+        }
+
+        // Register form validation
+        function validateRegisterForm() {
+            const pw = document.getElementById('register-password').value;
+            const cpw = document.getElementById('register-confirm-password').value;
+            if (pw !== cpw) {
+                alert('Passwords do not match. Please try again.');
+                return false;
+            }
+            return true;
+        }
+
+        // ========== Forgot Password Flow ==========
+        let forgotUsername = '';
+
+        function showForgotError(step, msg) {
+            const el = document.getElementById('forgot-error-' + step);
+            el.textContent = msg;
+            el.style.display = 'block';
+        }
+
+        function hideForgotErrors() {
+            for (let i = 1; i <= 3; i++) {
+                const el = document.getElementById('forgot-error-' + i);
+                if (el) { el.style.display = 'none'; el.textContent = ''; }
+            }
+        }
+
+        function setForgotStep(step) {
+            // Update step indicators
+            for (let i = 1; i <= 3; i++) {
+                const ind = document.getElementById('step-ind-' + i);
+                ind.classList.toggle('active', i <= step);
+                ind.classList.toggle('completed', i < step);
+            }
+            // Show/hide step panels
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('forgot-step-' + i).style.display = (i === step) ? 'block' : 'none';
+            }
+            hideForgotErrors();
+        }
+
+        // Step 1: Submit username
+        async function forgotStep1() {
+            const username = document.getElementById('forgot-username').value.trim();
+            if (!username) { showForgotError(1, 'Please enter your username or email.'); return; }
+
+            forgotUsername = username;
+            try {
+                const res = await fetch('forgot_password.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'step=1&username=' + encodeURIComponent(username)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('forgot-question-text').textContent = data.question;
+                    setForgotStep(2);
+                } else {
+                    showForgotError(1, data.message);
+                }
+            } catch (e) {
+                showForgotError(1, 'Network error. Please try again.');
+            }
+        }
+
+        // Step 2: Verify answer
+        async function forgotStep2() {
+            const answer = document.getElementById('forgot-answer').value.trim();
+            if (!answer) { showForgotError(2, 'Please enter your answer.'); return; }
+
+            try {
+                const res = await fetch('forgot_password.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'step=2&answer=' + encodeURIComponent(answer)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    setForgotStep(3);
+                } else {
+                    showForgotError(2, data.message);
+                }
+            } catch (e) {
+                showForgotError(2, 'Network error. Please try again.');
+            }
+        }
+
+        // Step 3: Reset password
+        async function forgotStep3() {
+            const newPw = document.getElementById('forgot-new-password').value;
+            const confirmPw = document.getElementById('forgot-confirm-password').value;
+
+            if (newPw.length < 6) { showForgotError(3, 'Password must be at least 6 characters.'); return; }
+            if (newPw !== confirmPw) { showForgotError(3, 'Passwords do not match.'); return; }
+
+            try {
+                const res = await fetch('forgot_password.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'step=3&new_password=' + encodeURIComponent(newPw) + '&confirm_password=' + encodeURIComponent(confirmPw)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    alert('✅ ' + data.message);
+                    // Reset the form and go back to login
+                    document.getElementById('forgot-username').value = '';
+                    document.getElementById('forgot-answer').value = '';
+                    document.getElementById('forgot-new-password').value = '';
+                    document.getElementById('forgot-confirm-password').value = '';
+                    setForgotStep(1);
+                    showSection('login-form');
+                } else {
+                    showForgotError(3, data.message);
+                }
+            } catch (e) {
+                showForgotError(3, 'Network error. Please try again.');
+            }
+        }
+
+        // ========== Google Auth ==========
+        async function handleGoogleLogin(response) {
+            try {
+                const formData = new URLSearchParams();
+                formData.append('action', 'google_auth');
+                formData.append('credential', response.credential);
+                const res = await fetch('auth.php', { method: 'POST', body: formData });
+                const html = await res.text();
+                // If successful, auth.php returns a meta-refresh page
+                document.open(); document.write(html); document.close();
+            } catch (e) {
+                console.error('Google Auth Error:', e);
+                alert('Google Authentication failed. Please try again.');
+            }
+        }
+
+        // ========== Unified Auth Modal ==========
+        let authCurrentStep = 'entry';
+        let authEmailValue = '';
+
+        function openAuthModal() {
+            authGoToStep('entry');
+            document.getElementById('auth-email').value = '';
+            document.getElementById('authModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => document.getElementById('authModalCard').classList.add('auth-modal-visible'), 10);
+            setTimeout(() => document.getElementById('auth-email').focus(), 200);
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModalCard').classList.remove('auth-modal-visible');
+            setTimeout(() => {
+                document.getElementById('authModal').style.display = 'none';
+                document.body.style.overflow = '';
+            }, 280);
+        }
+
+        function handleAuthOverlayClick(e) {
+            if (e.target === document.getElementById('authModal')) closeAuthModal();
+        }
+
+        function authGoToStep(step) {
+            document.querySelectorAll('.auth-step').forEach(el => el.style.display = 'none');
+            document.getElementById('auth-step-' + step).style.display = 'block';
+            authCurrentStep = step;
+            // clear errors
+            document.querySelectorAll('.auth-error').forEach(el => { el.textContent = ''; el.style.display = 'none'; });
+        }
+
+        function authGoBack() { authGoToStep('entry'); }
+
+        function showAuthError(stepId, msg) {
+            const el = document.getElementById('auth-error-' + stepId);
+            if (el) { el.textContent = msg; el.style.display = 'block'; }
+        }
+
+        async function checkEmailAndProceed() {
+            const email = document.getElementById('auth-email').value.trim();
+            if (!email) { showAuthError('entry', 'Please enter your email address.'); return; }
+
+            const btn = document.getElementById('auth-email-continue-btn');
+            btn.disabled = true;
+            btn.querySelector('span').textContent = 'Checking...';
+
+            try {
+                const body = new URLSearchParams({ action: 'check_email', email });
+                const res = await fetch('auth.php', { method: 'POST', body });
+                const data = await res.json();
+                authEmailValue = email;
+
+                if (data.exists) {
+                    if (data.oauth_provider === 'google') {
+                        authGoToStep('google-only');
+                    } else {
+                        document.getElementById('signin-email-label').textContent = 'Signing in as ' + email;
+                        document.getElementById('auth-password').value = '';
+                        authGoToStep('signin');
+                        setTimeout(() => document.getElementById('auth-password').focus(), 100);
+                    }
+                } else {
+                    document.getElementById('signup-email-label').textContent = 'Creating account for ' + email;
+                    authGoToStep('signup');
+                    setTimeout(() => document.getElementById('auth-username').focus(), 100);
+                }
+            } catch (e) {
+                showAuthError('entry', 'Network error. Please try again.');
+            } finally {
+                btn.disabled = false;
+                btn.querySelector('span').textContent = 'Continue';
+            }
+        }
+
+        async function submitSignIn() {
+            const password = document.getElementById('auth-password').value;
+            if (!password) { showAuthError('signin', 'Please enter your password.'); return; }
+
+            const btn = document.querySelector('#auth-step-signin .auth-modal-btn');
+            btn.disabled = true; btn.querySelector('span').textContent = 'Signing in...';
+
+            try {
+                const body = new URLSearchParams({ action: 'json_login', username: authEmailValue, password });
+                const res = await fetch('auth.php', { method: 'POST', body });
+                const data = await res.json();
+                if (data.success) {
+                    closeAuthModal();
+                    location.reload();
+                } else {
+                    showAuthError('signin', data.message || 'Login failed.');
+                }
+            } catch (e) {
+                showAuthError('signin', 'Network error. Please try again.');
+            } finally {
+                btn.disabled = false; btn.querySelector('span').textContent = 'Sign In';
+            }
+        }
+
+        async function submitSignUp() {
+            const username = document.getElementById('auth-username').value.trim();
+            const password = document.getElementById('auth-signup-password').value;
+            const confirm = document.getElementById('auth-confirm-password').value;
+            const secQ = document.getElementById('auth-security-question').value;
+            const secA = document.getElementById('auth-security-answer').value.trim();
+
+            if (!username || !password || !confirm) { showAuthError('signup', 'Please fill in all required fields.'); return; }
+            if (password !== confirm) { showAuthError('signup', 'Passwords do not match.'); return; }
+            if (!secQ) { showAuthError('signup', 'Please choose a security question.'); return; }
+            if (!secA) { showAuthError('signup', 'Please enter your security answer.'); return; }
+
+            const btn = document.querySelector('#auth-step-signup .auth-modal-btn');
+            btn.disabled = true; btn.querySelector('span').textContent = 'Creating...';
+
+            try {
+                const body = new URLSearchParams({
+                    action: 'json_register', username, email: authEmailValue,
+                    password, confirm_password: confirm,
+                    security_question: secQ, security_answer: secA
+                });
+                const res = await fetch('auth.php', { method: 'POST', body });
+                const data = await res.json();
+                if (data.success) {
+                    closeAuthModal();
+                    location.reload();
+                } else {
+                    showAuthError('signup', data.message || 'Registration failed.');
+                }
+            } catch (e) {
+                showAuthError('signup', 'Network error. Please try again.');
+            } finally {
+                btn.disabled = false; btn.querySelector('span').textContent = 'Create Account';
+            }
+        }
+
+        function toggleAuthPassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const svg = btn.querySelector('svg');
+            const eyeOpen = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+            const eyeOff = '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+            if (input.type === 'password') { input.type = 'text'; svg.innerHTML = eyeOff; }
+            else { input.type = 'password'; svg.innerHTML = eyeOpen; }
+        }
+
+        function checkPasswordStrengthModal(password) {
+            const fill = document.getElementById('auth-strength-fill');
+            const text = document.getElementById('auth-strength-text');
+            let score = 0;
+
+            let hasUpper = /[A-Z]/.test(password);
+            let hasLower = /[a-z]/.test(password);
+            let hasNumber = /[0-9]/.test(password);
+            let isLongEnough = password.length >= 8;
+
+            if (password.length > 0) score = 1;
+            if (isLongEnough) score++;
+            if (hasUpper && hasLower) score++;
+            if (hasNumber) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+
+            const levels = [
+                { w: '0%', c: 'transparent', l: 'Min 8 chars, 1 uppercase, 1 lowercase, 1 number' },
+                { w: '20%', c: '#ef4444', l: 'Very Weak' },
+                { w: '40%', c: '#f97316', l: 'Weak' },
+                { w: '60%', c: '#eab308', l: 'Fair' },
+                { w: '80%', c: '#22c55e', l: 'Strong' },
+                { w: '100%', c: '#10b981', l: 'Very Strong' }
+            ];
+            const index = Math.min(score, 5);
+            const lv = levels[index] || levels[0];
+            fill.style.width = lv.w; fill.style.background = lv.c;
+            text.textContent = lv.l; text.style.color = lv.c;
+        }
+
+        // Escape key closes auth modal
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && document.getElementById('authModal').style.display === 'flex') closeAuthModal();
+        });
+
+        // ========== Profile Dropdown ==========
+        function toggleProfileDropdown() {
+            const menu = document.getElementById('user-menu');
+            menu.classList.toggle('active');
+        }
+
+        // ========== Mobile Menu Toggle ==========
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('nav-links');
+            const toggleBtn = document.getElementById('mobile-menu-toggle');
+            navLinks.classList.toggle('active');
+            toggleBtn.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const navLinks = document.getElementById('nav-links');
+            const toggleBtn = document.getElementById('mobile-menu-toggle');
+            if (navLinks) navLinks.classList.remove('active');
+            if (toggleBtn) toggleBtn.classList.remove('active');
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function (event) {
+            const userMenu = document.getElementById('user-menu');
+            const mobileContainer = document.querySelector('.mobile-menu-container');
+
+            // Close main dropdown if clicking outside the main user menu
+            if (userMenu && !userMenu.contains(event.target)) {
+                userMenu.classList.remove('active');
+            }
+
+            // Close mobile menu if clicking outside
+            if (mobileContainer && !mobileContainer.contains(event.target)) {
+                closeMobileMenu();
+            }
+        });
+
+        // ========== Profile Modal ==========
+        function openProfileModal() {
+            if (!isLoggedIn) {
+                openAuthModal();
+                return;
+            }
+            document.getElementById('user-menu').classList.remove('active');
+            document.getElementById('profileModal').style.display = 'flex';
+            loadProfileData('profile');
+            if (typeof updateBottomNav === 'function') updateBottomNav('nav-profile');
+        }
+        function closeProfileModal() {
+            document.getElementById('profileModal').style.display = 'none';
+        }
+
+        // ========== Settings Modal ==========
+        function openSettingsModal() {
+            document.getElementById('user-menu').classList.remove('active');
+            document.getElementById('settingsModal').style.display = 'flex';
+            switchSettingsTab('general');
+            loadProfileData('settings');
+            if (typeof syncSettingsToggle === 'function') syncSettingsToggle();
+        }
+        function closeSettingsModal() {
+            document.getElementById('settingsModal').style.display = 'none';
+        }
+
+        function switchSettingsTab(tab) {
+            document.querySelectorAll('.settings-tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.settings-tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+            document.getElementById(`settings-${tab}`).classList.add('active');
+        }
+
+        // ========== Avatar Shuffle System (Claude-style with SVG icons) ==========
+        const avatarThemes = [
+            { bg: '#6b8f71', icon: '<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="3" fill="white"/><line x1="20" y1="6" x2="20" y2="14" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="20" y1="26" x2="20" y2="34" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="6" y1="20" x2="14" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="26" y1="20" x2="34" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="10" y1="10" x2="15" y2="15" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="25" y1="25" x2="30" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="10" x2="25" y2="15" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="15" y1="25" x2="10" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>' },
+            { bg: '#b8c4d0', icon: '<svg viewBox="0 0 40 40" fill="none"><circle cx="12" cy="12" r="3" fill="#7a9bb5"/><circle cx="20" cy="12" r="3" fill="#7a9bb5"/><circle cx="28" cy="12" r="3" fill="#7a9bb5"/><circle cx="12" cy="20" r="3" fill="#7a9bb5"/><circle cx="20" cy="20" r="3" fill="#7a9bb5"/><circle cx="28" cy="20" r="3" fill="#7a9bb5"/><circle cx="12" cy="28" r="3" fill="#7a9bb5"/><circle cx="20" cy="28" r="3" fill="#7a9bb5"/><circle cx="28" cy="28" r="3" fill="#7a9bb5"/></svg>' },
+            { bg: '#7c9885', icon: '<svg viewBox="0 0 40 40" fill="none"><rect x="8" y="26" width="8" height="8" rx="1.5" fill="white" opacity="0.9"/><rect x="16" y="18" width="8" height="16" rx="1.5" fill="white" opacity="0.9"/><rect x="24" y="10" width="8" height="24" rx="1.5" fill="white" opacity="0.9"/></svg>' },
+            { bg: '#4a5568', icon: '<svg viewBox="0 0 40 40" fill="none"><rect x="10" y="10" width="8" height="8" rx="2" fill="#68d391"/><rect x="22" y="10" width="8" height="8" rx="2" fill="#68d391"/><rect x="10" y="22" width="8" height="8" rx="2" fill="#68d391"/><rect x="22" y="22" width="8" height="8" rx="2" fill="#68d391"/><line x1="18" y1="14" x2="22" y2="14" stroke="#68d391" stroke-width="2"/><line x1="18" y1="26" x2="22" y2="26" stroke="#68d391" stroke-width="2"/><line x1="14" y1="18" x2="14" y2="22" stroke="#68d391" stroke-width="2"/><line x1="26" y1="18" x2="26" y2="22" stroke="#68d391" stroke-width="2"/></svg>' },
+            { bg: '#c4b5d4', icon: '<svg viewBox="0 0 40 40" fill="none"><ellipse cx="20" cy="16" rx="5" ry="6" fill="#7c5ba8" opacity="0.8"/><ellipse cx="14" cy="23" rx="5" ry="6" fill="#7c5ba8" opacity="0.7"/><ellipse cx="26" cy="23" rx="5" ry="6" fill="#7c5ba8" opacity="0.7"/><circle cx="20" cy="20" r="3" fill="#ddd0ee"/></svg>' },
+            { bg: '#d4956b', icon: '<svg viewBox="0 0 40 40" fill="none"><polygon points="20,6 34,14 34,26 20,34 6,26 6,14" stroke="white" stroke-width="2.5" fill="none"/><polygon points="20,12 28,16 28,24 20,28 12,24 12,16" stroke="white" stroke-width="2" fill="white" opacity="0.2"/></svg>' },
+            { bg: '#5b7fa5', icon: '<svg viewBox="0 0 40 40" fill="none"><path d="M20 8 L20 32" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M12 14 L20 8 L28 14" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="12" cy="20" r="3" fill="white" opacity="0.7"/><circle cx="28" cy="20" r="3" fill="white" opacity="0.7"/><circle cx="12" cy="28" r="3" fill="white" opacity="0.5"/><circle cx="28" cy="28" r="3" fill="white" opacity="0.5"/></svg>' },
+            { bg: '#8b6f5e', icon: '<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="12" stroke="white" stroke-width="2.5" fill="none"/><circle cx="20" cy="20" r="6" stroke="white" stroke-width="2" fill="none"/><circle cx="20" cy="20" r="2" fill="white"/></svg>' },
+            { bg: '#5e8b7f', icon: '<svg viewBox="0 0 40 40" fill="none"><path d="M8 28 Q14 10, 20 20 Q26 30, 32 12" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="8" cy="28" r="2.5" fill="white"/><circle cx="32" cy="12" r="2.5" fill="white"/></svg>' },
+            { bg: '#a0855b', icon: '<svg viewBox="0 0 40 40" fill="none"><polygon points="20,7 24,17 34,17 26,23 29,33 20,27 11,33 14,23 6,17 16,17" fill="white" opacity="0.85"/></svg>' },
+            { bg: '#7a8b9e', icon: '<svg viewBox="0 0 40 40" fill="none"><path d="M10 30 L20 10 L30 30 Z" stroke="white" stroke-width="2.5" fill="none" stroke-linejoin="round"/><line x1="14" y1="24" x2="26" y2="24" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>' },
+            { bg: '#9b6b8a', icon: '<svg viewBox="0 0 40 40" fill="none"><rect x="14" y="8" width="12" height="12" rx="2" fill="white" opacity="0.85" transform="rotate(45 20 14)"/><rect x="14" y="20" width="12" height="12" rx="2" fill="white" opacity="0.6" transform="rotate(45 20 26)"/></svg>' },
+            { bg: '#6b8fa0', icon: '<svg viewBox="0 0 40 40" fill="none"><circle cx="14" cy="14" r="6" fill="white" opacity="0.7"/><circle cx="26" cy="14" r="6" fill="white" opacity="0.5"/><circle cx="20" cy="25" r="6" fill="white" opacity="0.6"/></svg>' },
+            { bg: '#8fa06b', icon: '<svg viewBox="0 0 40 40" fill="none"><rect x="8" y="8" width="10" height="10" rx="2" fill="white" opacity="0.85"/><rect x="22" y="8" width="10" height="10" rx="2" fill="white" opacity="0.6"/><rect x="8" y="22" width="10" height="10" rx="2" fill="white" opacity="0.6"/><rect x="22" y="22" width="10" height="10" rx="2" fill="white" opacity="0.45"/></svg>' },
+            { bg: '#8b5e5e', icon: '<svg viewBox="0 0 40 40" fill="none"><path d="M20 8 C28 8, 32 14, 32 20 C32 28, 24 32, 20 32 C12 32, 8 24, 8 20 C8 12, 16 8, 20 8 Z" fill="none" stroke="white" stroke-width="2.5"/><path d="M20 14 C24 14, 26 17, 26 20 C26 24, 22 26, 20 26" fill="none" stroke="white" stroke-width="2" opacity="0.7"/></svg>' },
+        ];
+
+        let currentAvatarIndex = parseInt(localStorage.getItem('avatarThemeIndex') || '0');
+
+        function applyAvatarTheme(index, animate = false) {
+            const theme = avatarThemes[index % avatarThemes.length];
+            const avatarIds = ['profile-hero-avatar', 'user-avatar', 'dropdown-avatar'];
+
+            avatarIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+
+                const updateAvatar = () => {
+                    el.style.background = theme.bg;
+                    el.innerHTML = theme.icon;
+                    if (id === 'profile-hero-avatar') {
+                        el.style.boxShadow = '0 4px 20px ' + theme.bg + '4D';
+                    }
+                };
+
+                if (animate && id === 'profile-hero-avatar') {
+                    el.classList.add('shuffling');
+                    setTimeout(updateAvatar, 200);
+                    setTimeout(() => el.classList.remove('shuffling'), 500);
+                } else if (animate) {
+                    setTimeout(updateAvatar, 200);
+                } else {
+                    updateAvatar();
+                }
+            });
+        }
+
+        function shuffleAvatar() {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * avatarThemes.length);
+            } while (newIndex === currentAvatarIndex && avatarThemes.length > 1);
+
+            currentAvatarIndex = newIndex;
+            localStorage.setItem('avatarThemeIndex', newIndex.toString());
+            applyAvatarTheme(newIndex, true);
+        }
+
+        // ========== Load Profile Data ==========
+        async function loadProfileData(target) {
+            try {
+                const res = await fetch('profile_api.php?action=get_profile');
+                const data = await res.json();
+                if (data.success) {
+                    const u = data.user;
+                    const initial = u.username.charAt(0).toUpperCase();
+
+                    if (target === 'profile' || target === 'both') {
+                        // Hero card
+                        document.getElementById('profile-hero-name').textContent = u.username;
+                        document.getElementById('profile-hero-email').textContent = u.email || '';
+                        // Apply saved avatar SVG icon + theme
+                        applyAvatarTheme(currentAvatarIndex);
+
+                        // Info card (read-only)
+                        document.getElementById('profile-info-name').textContent = u.username;
+                        document.getElementById('profile-info-email').textContent = u.email || 'Not set';
+
+                        // Member since
+                        if (u.created_at) {
+                            const d = new Date(u.created_at);
+                            document.getElementById('profile-info-joined').textContent = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                        }
+
+                        // Security question
+                        const sq = document.getElementById('profile-security-q');
+                        document.getElementById('profile-security-hint').textContent = 'Type: SET Security Question For ' + u.username;
+                        if (u.security_question) {
+                            sq.value = u.security_question;
+                            document.getElementById('profile-security-status').textContent = '✓ Security question is set';
+                            document.getElementById('profile-security-status').style.color = '#10b981';
+                        } else {
+                            document.getElementById('profile-security-status').textContent = '✗ No security question set';
+                            document.getElementById('profile-security-status').style.color = '#f87171';
+                        }
+
+                        // Other email
+                        if (u.other_email) {
+                            document.getElementById('profile-other-email').value = u.other_email;
+                            document.getElementById('profile-other-email-status').textContent = '✓ Secondary email saved';
+                            document.getElementById('profile-other-email-status').style.color = '#10b981';
+                        }
+                    }
+                    if (target === 'settings' || target === 'both') {
+                        document.getElementById('settings-email').value = u.email || '';
+                        document.getElementById('change-name-hint').textContent = 'Type: Change Account Name ' + u.username;
+                        document.getElementById('delete-confirm-hint').textContent = 'Type: Delete Account ' + u.username;
+                    }
+                }
+            } catch (e) {
+                console.error('Failed to load profile:', e);
+            }
+        }
+
+        // ========== Profile Actions ==========
+        async function updateOtherEmail() {
+            const email = document.getElementById('profile-other-email').value.trim();
+            if (!email) { showFieldStatus('profile-other-email-status', { error: 'Please enter an email.' }); return; }
+            const res = await fetch('profile_api.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'action=update_other_email&email=' + encodeURIComponent(email) });
+            const data = await res.json();
+            showFieldStatus('profile-other-email-status', data);
+        }
+
+        async function updateProfileSecurity() {
+            const q = document.getElementById('profile-security-q').value;
+            const a = document.getElementById('profile-security-a').value.trim();
+
+            if (!q || !a) { showToast('Please select a question and provide an answer.', 'error'); return; }
+
+            // Get username from profile hero
+            const currentName = document.getElementById('profile-hero-name').textContent;
+            const confirmHint = 'SET Security Question For ' + currentName;
+
+            showConfirmPopup('Update Security Question?', 'This will replace your existing recovery question.', confirmHint, async () => {
+                const res = await fetch('profile_api.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'action=update_security&question=' + encodeURIComponent(q) + '&answer=' + encodeURIComponent(a) });
+                const data = await res.json();
+                showFieldStatus('profile-security-status', data);
+                if (data.success) {
+                    document.getElementById('profile-security-a').value = '';
+                    showToast('Security question updated successfully!', 'success');
+                }
+            });
+        }
+
+        // ========== Settings Actions ==========
+        async function changeAccountName() {
+            const newName = document.getElementById('settings-new-name').value.trim();
+
+            if (!newName) {
+                showFieldStatus('settings-name-status', { error: 'Please enter a new name.' });
+                return;
+            }
+
+            // Get current username from session
+            const currentName = document.getElementById('username-display').textContent;
+            const confirmHint = 'Change Account Name ' + currentName;
+
+            showConfirmPopup('Change your account name?', 'Your name will change from "' + currentName + '" to "' + newName + '".', confirmHint, async () => {
+                const res = await fetch('profile_api.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'action=update_name&name=' + encodeURIComponent(newName) });
+                const data = await res.json();
+                showFieldStatus('settings-name-status', data);
+                if (data.success) {
+                    checkUserSession();
+                    loadProfileData('settings');
+                    document.getElementById('settings-new-name').value = '';
+                    showToast('Account name changed successfully!', 'success');
+                }
+            });
+        }
+
+        async function deleteAccount() {
+            const currentName = document.getElementById('username-display').textContent;
+            const confirmHint = 'Delete Account ' + currentName;
+
+            showConfirmPopup('⚠️ Permanently delete your account?', 'This action cannot be undone. All your data will be removed.', confirmHint, async () => {
+                const res = await fetch('profile_api.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'action=delete_account&confirm=' + encodeURIComponent(confirmHint) });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('Your account has been deleted.', 'success');
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    showFieldStatus('delete-status', data);
+                }
+            }, true);
+        }
+
+        function showFieldStatus(elId, data) {
+            const el = document.getElementById(elId);
+            if (!el) return;
+            el.textContent = data.success ? (data.message || '✓ Saved') : (data.error || '✗ Error');
+            el.style.color = data.success ? '#10b981' : '#f87171';
+            setTimeout(() => { if (data.success) el.textContent = ''; }, 3000);
+        }
+
+        // ========== Custom Confirmation Popup with Type-to-Confirm ==========
+        function showConfirmPopup(title, message, confirmText, onConfirm, isDanger = false) {
+            const existing = document.getElementById('confirm-popup-overlay');
+            if (existing) existing.remove();
+
+            const overlay = document.createElement('div');
+            overlay.id = 'confirm-popup-overlay';
+            overlay.className = 'confirm-popup-overlay';
+            overlay.innerHTML = `
+            <div class="confirm-popup ${isDanger ? 'danger' : ''}">
+                <div class="confirm-popup-icon">${isDanger ? '<i class="fas fa-exclamation-triangle"></i>' : '<i class="fas fa-question-circle"></i>'}</div>
+                <h3 class="confirm-popup-title">${title}</h3>
+                <p class="confirm-popup-message">${message}</p>
+                <div class="confirm-popup-input-section">
+                    <p class="confirm-popup-hint">Type: <strong>${confirmText}</strong></p>
+                    <input type="text" id="confirm-popup-input" class="confirm-popup-text-input" placeholder="Type to confirm..." autocomplete="off" />
+                </div>
+                <div class="confirm-popup-actions">
+                    <button class="confirm-popup-cancel" onclick="closeConfirmPopup()">Cancel</button>
+                    <button class="confirm-popup-confirm ${isDanger ? 'danger' : ''}" id="confirm-popup-yes" disabled>Confirm</button>
+                </div>
+            </div>
+        `;
+            document.body.appendChild(overlay);
+
+            requestAnimationFrame(() => overlay.classList.add('active'));
+
+            // Enable button only when text matches
+            const inputEl = document.getElementById('confirm-popup-input');
+            const confirmBtn = document.getElementById('confirm-popup-yes');
+
+            inputEl.addEventListener('input', () => {
+                if (inputEl.value.trim().toLowerCase() === confirmText.toLowerCase()) {
+                    confirmBtn.disabled = false;
+                    confirmBtn.style.opacity = '1';
+                } else {
+                    confirmBtn.disabled = true;
+                    confirmBtn.style.opacity = '0.4';
+                }
+            });
+
+            // Focus the input
+            setTimeout(() => inputEl.focus(), 350);
+
+            confirmBtn.addEventListener('click', () => {
+                if (inputEl.value.trim().toLowerCase() === confirmText.toLowerCase()) {
+                    closeConfirmPopup();
+                    onConfirm();
+                }
+            });
+
+            // Enter key to confirm
+            inputEl.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !confirmBtn.disabled) {
+                    closeConfirmPopup();
+                    onConfirm();
+                }
+            });
+
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeConfirmPopup();
+            });
+        }
+
+        function closeConfirmPopup() {
+            const overlay = document.getElementById('confirm-popup-overlay');
+            if (overlay) {
+                overlay.classList.remove('active');
+                setTimeout(() => overlay.remove(), 300);
+            }
+        }
+
+        // ========== Toast Notification System ==========
+        function showToast(message, type = 'info') {
+            let container = document.getElementById('toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'toast-container';
+                container.className = 'toast-container';
+                document.body.appendChild(container);
+            }
+
+            const icons = { success: 'fas fa-check-circle', error: 'fas fa-times-circle', info: 'fas fa-info-circle', warning: 'fas fa-exclamation-circle' };
+            const toast = document.createElement('div');
+            toast.className = 'toast toast-' + type;
+            toast.innerHTML = '<i class="' + icons[type] + '"></i><span>' + message + '</span>';
+            container.appendChild(toast);
+
+            requestAnimationFrame(() => toast.classList.add('show'));
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 400);
+            }, 3500);
+        }
+
+        // ========== Click Outside to Close Modals ==========
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('modal')) {
+                if (e.target.id === 'article-reader') {
+                    closeArticleReader();
+                } else {
+                    e.target.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+
+        // ========== Escape Key to Close ==========
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                // Close confirm popup first
+                const popup = document.getElementById('confirm-popup-overlay');
+                if (popup) { closeConfirmPopup(); return; }
+
+                // Then close any open modal
+                if (document.getElementById('article-reader').style.display === 'block') {
+                    closeArticleReader();
+                    return;
+                }
+
+                document.querySelectorAll('.modal').forEach(modal => {
+                    if (modal.style.display === 'flex' || modal.style.display === 'block') {
+                        modal.style.display = 'none';
+                    }
+                });
+
+                // Close mobile menu
+                closeMobileMenu();
+            }
+        });
+
+        // ========== Appearance Toggle ==========
+        // toggleTheme() is now defined in app.js with full light/dark mode support
+    </script>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal" style="display:none;">
+        <div class="modal-content settings-modal-content profile-modal-content">
+            <span class="modal-close" onclick="closeProfileModal()">&times;</span>
+
+            <!-- Profile Hero Card -->
+            <div class="profile-hero">
+                <div class="avatar-picker-wrapper" id="avatar-picker-wrapper">
+                    <div class="profile-hero-avatar" id="profile-hero-avatar"></div>
+                    <button class="avatar-shuffle-btn" id="avatar-shuffle-btn" onclick="shuffleAvatar()"
+                        title="Shuffle avatar style">
+                        <i class="fas fa-random"></i>
+                    </button>
+                </div>
+                <h2 class="profile-hero-name" id="profile-hero-name"></h2>
+                <p class="profile-hero-email" id="profile-hero-email"></p>
+                <span class="profile-hero-badge"><i class="fas fa-check-circle"></i> Verified</span>
+            </div>
+
+            <div class="modal-body">
+                <!-- Account Info (Read-only) -->
+                <div class="profile-info-card">
+                    <h3><i class="fas fa-id-card"></i> Account Information</h3>
+                    <div class="profile-info-row">
+                        <span class="profile-info-label"><i class="fas fa-user"></i> Name</span>
+                        <span class="profile-info-value" id="profile-info-name"></span>
+                    </div>
+                    <div class="profile-info-row">
+                        <span class="profile-info-label"><i class="fas fa-envelope"></i> Primary Email</span>
+                        <span class="profile-info-value" id="profile-info-email"></span>
+                    </div>
+                    <div class="profile-info-row">
+                        <span class="profile-info-label"><i class="fas fa-calendar-alt"></i> Member Since</span>
+                        <span class="profile-info-value" id="profile-info-joined"></span>
+                    </div>
+                </div>
+
+                <!-- Add Other Email -->
+                <div class="profile-section-card">
+                    <h3><i class="fas fa-envelope-open-text"></i> Add Other Email <span
+                            class="optional-tag">Optional</span></h3>
+                    <p class="profile-section-desc">Add a secondary email for account recovery purposes.</p>
+                    <div class="settings-input-row">
+                        <input type="email" id="profile-other-email" placeholder="secondary@email.com" />
+                        <button class="settings-save-btn" onclick="updateOtherEmail()">Add</button>
+                    </div>
+                    <span class="field-status" id="profile-other-email-status"></span>
+                </div>
+
+                <!-- Security Question -->
+                <div class="profile-section-card">
+                    <h3><i class="fas fa-shield-alt"></i> Security Question</h3>
+                    <p class="profile-section-desc">Set a question to help recover your account if you forget your
+                        password.</p>
+                    <select id="profile-security-q" class="settings-select">
+                        <option value="" disabled selected>Choose a security question</option>
+                        <option value="pet">What is the name of your first pet?</option>
+                        <option value="city">In which city were you born?</option>
+                        <option value="school">What was the name of your first school?</option>
+                        <option value="food">What is your favorite food?</option>
+                        <option value="movie">What is your all-time favorite movie?</option>
+                        <option value="friend">What is the name of your childhood best friend?</option>
+                    </select>
+                    <div class="settings-input-row" style="margin-top: 0.5rem;">
+                        <input type="text" id="profile-security-a" placeholder="Your answer" />
+                        <button class="settings-save-btn" onclick="updateProfileSecurity()">Save</button>
+                    </div>
+                    <span class="field-status" id="profile-security-status"></span>
+                </div>
+
+                <!-- Logout Section -->
+                <div class="profile-logout-section">
+                    <button class="profile-logout-btn" onclick="location.href='logout.php'">
+                        <i class="fas fa-sign-out-alt"></i> Logout from Session
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <style>
+        .settings-modal-body-vertical {
+            display: flex;
+            flex-direction: row;
+            gap: 1.5rem;
+            min-height: 400px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            max-height: 75vh;
+            padding-bottom: 1rem;
+        }
+        @media (max-width: 768px) {
+            .settings-modal-body-vertical {
+                flex-direction: column;
+                gap: 1rem;
+                min-height: auto;
+                max-height: 85vh;
+            }
+        }
+        .settings-tabs-vertical {
+            display: flex;
+            flex-direction: column;
+            min-width: 140px;
+            flex-shrink: 0;
+            border-right: 1px solid rgba(148, 163, 184, 0.1);
+            padding-right: 1rem;
+            margin-bottom: 0;
+            border-bottom: none;
+            gap: 0.5rem;
+        }
+        @media (max-width: 768px) {
+            .settings-tabs-vertical {
+                flex-direction: row;
+                overflow-x: auto;
+                border-right: none;
+                border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+                padding-right: 0;
+                padding-bottom: 1rem;
+                margin-bottom: 0.5rem;
+                gap: 0.8rem;
+                -ms-overflow-style: none; /* IE and Edge */
+                scrollbar-width: none; /* Firefox */
+                flex-shrink: 0;
+            }
+            .settings-tabs-vertical::-webkit-scrollbar {
+                display: none; /* Hide scrollbar */
+            }
+        }
+        .settings-tabs-vertical .settings-tab-btn {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: none;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 3px solid transparent;
+            font-weight: 600;
+            color: var(--text-secondary);
+            background: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .settings-tabs-vertical .settings-tab-btn i {
+            font-size: 1.1rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .settings-tabs-vertical .settings-tab-btn:hover {
+            background: rgba(148, 163, 184, 0.05);
+            color: var(--text-primary);
+        }
+        .settings-tabs-vertical .settings-tab-btn.active {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.05));
+            color: #3b82f6;
+            border-bottom: none !important;
+            border-left: 4px solid #3b82f6;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        .settings-tabs-vertical .settings-tab-btn.active i {
+            opacity: 1;
+        }
+        @media (max-width: 768px) {
+            .settings-tabs-vertical .settings-tab-btn {
+                border-left: none;
+                border-bottom: none;
+                border-radius: 20px;
+                background: rgba(148, 163, 184, 0.08);
+                padding: 0.7rem 1.2rem;
+                width: auto;
+            }
+            .settings-tabs-vertical .settings-tab-btn.active {
+                border-left: none;
+                background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+                color: #ffffff !important;
+                box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            }
+            .settings-tabs-vertical .settings-tab-btn.active i {
+                color: #ffffff !important;
+            }
+        }
+        .settings-content-area {
+            flex-grow: 1;
+            min-width: 0;
+            width: 100%;
+            animation: fadeInSlideUp 0.3s ease;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            padding-bottom: 1rem;
+        }
+        @keyframes fadeInSlideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Modern Inputs for Forms */
+        .modern-form-input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: var(--text-primary);
+            padding: 0.85rem 1.2rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        body.light-theme .modern-form-input {
+            background: #ffffff;
+            border-color: #cbd5e1;
+        }
+        .modern-form-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            outline: none;
+        }
+        .modern-form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Modern Submit Buttons */
+        .modern-submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        .modern-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+            filter: brightness(1.1);
+        }
+        .modern-submit-btn.danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+        .modern-submit-btn.danger:hover {
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+        }
+        .profile-section-card {
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--bdr);
+            background: rgba(255, 255, 255, 0.02);
+            margin-bottom: 1.5rem;
+        }
+        body.light-theme .profile-section-card {
+            background: #f8fafc;
+        }
+    </style>
+    <div id="settingsModal" class="modal" style="display:none;">
+        <div class="modal-content settings-modal-content" style="max-width: 700px;">
+            <span class="modal-close" onclick="closeSettingsModal()">&times;</span>
+            <div class="modal-header">
+                <i class="fas fa-cog"></i>
+                <h2>Settings</h2>
+            </div>
+            <div class="modal-body settings-modal-body-vertical" style="padding-top: 0;">
+                <!-- Tabs -->
+                <div class="settings-tabs settings-tabs-vertical">
+                    <button class="settings-tab-btn active" data-tab="general" onclick="switchSettingsTab('general')"><i
+                            class="fas fa-sliders-h"></i> General</button>
+                    <button class="settings-tab-btn" data-tab="account" onclick="switchSettingsTab('account')"><i
+                            class="fas fa-user-cog"></i> Account</button>
+                    <button class="settings-tab-btn" data-tab="help" onclick="switchSettingsTab('help')"><i
+                            class="fas fa-question-circle"></i> Help</button>
+                    <button class="settings-tab-btn" data-tab="report" onclick="switchSettingsTab('report')"><i
+                            class="fas fa-bug"></i> Report</button>
+                </div>
+                <div class="settings-content-area">
+
+                <!-- General Tab -->
+                <div class="settings-tab-content active" id="settings-general">
+                    <div class="settings-field-group">
+                        <label><i class="fas fa-palette"></i> Appearance</label>
+                        <div class="theme-selector-wrapper">
+                            <div class="theme-selector" id="theme-selector">
+                                <div class="theme-selector-pill" id="theme-selector-pill"></div>
+                                <button class="theme-selector-btn" data-theme="dark" onclick="setThemeMode('dark')">
+                                    <i class="fas fa-moon"></i> Dark
+                                </button>
+                                <button class="theme-selector-btn" data-theme="light" onclick="setThemeMode('light')">
+                                    <i class="fas fa-sun"></i> Light
+                                </button>
+                                <button class="theme-selector-btn" data-theme="system" onclick="setThemeMode('system')">
+                                    <i class="fas fa-desktop"></i> System
+                                </button>
+                            </div>
+                            <p class="theme-selector-desc" id="theme-selector-desc">Dark theme is active.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Tab -->
+                <div class="settings-tab-content" id="settings-account">
+                    <!-- Email (Read-only) -->
+                    <div class="profile-section-card" style="margin-bottom: 1.5rem;">
+                        <label class="modern-form-label" style="margin-bottom: 0.8rem;"><i class="fas fa-envelope" style="margin-right: 0.5rem; color: #64748b;"></i> Email Address</label>
+                        <div style="display: block; width: 100%;">
+                            <input type="email" id="settings-email" class="modern-form-input" placeholder="your@email.com" readonly disabled
+                                style="opacity: 0.6; cursor: not-allowed; background-color: transparent;" />
+                        </div>
+                        <span class="field-status" style="color: #64748b; font-size: 0.8rem; margin-top: 0.5rem; display: block;">Email address cannot be changed</span>
+                    </div>
+
+                    <!-- Change Name -->
+                    <div class="profile-section-card"
+                        style="border-color: rgba(59, 130, 246, 0.2); background: rgba(59, 130, 246, 0.03);">
+                        <h3 style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; color: var(--text-primary);"><i class="fas fa-user-edit" style="color: #3b82f6;"></i> Change Account Name</h3>
+                        <p class="profile-section-desc" style="margin-bottom: 1.2rem; color: var(--text-secondary); font-size: 0.95rem;">Enter your new name and click Change to update your profile.</p>
+                        <div style="display: flex; gap: 0.8rem; width: 100%; flex-wrap: wrap;">
+                            <input type="text" id="settings-new-name" class="modern-form-input" placeholder="Enter new name" style="flex: 1; min-width: 200px;" />
+                            <button class="modern-submit-btn" onclick="changeAccountName()" style="flex-shrink: 0; width: auto; padding: 0.85rem 1.5rem;">Change</button>
+                        </div>
+                        <span class="field-status" id="settings-name-status" style="margin-top: 0.5rem; display: block;"></span>
+                    </div>
+
+                    <!-- Delete Account -->
+                    <div class="profile-section-card" style="border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.03); margin-top: 2rem;">
+                        <label class="modern-form-label" style="color: #ef4444; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;"><i class="fas fa-exclamation-triangle"></i> Delete Account</label>
+                        <p class="danger-text" style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.2rem;">This action is permanent and cannot be undone. All your saved preferences and data will be removed.</p>
+                        <button class="modern-submit-btn danger" onclick="deleteAccount()" style="width: 100%;">
+                            <i class="fas fa-trash-alt"></i> Delete My Account
+                        </button>
+                        <span class="field-status" id="delete-status" style="margin-top: 0.5rem; display: block;"></span>
+                    </div>
+                </div>
+
+                <!-- Help Tab -->
+                <div class="settings-tab-content" id="settings-help">
+                    <div class="profile-section-card" style="border-color: rgba(59, 130, 246, 0.2); background: rgba(59, 130, 246, 0.03);">
+                        <h3 style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; color: var(--text-primary);"><i class="fas fa-question-circle" style="color: #3b82f6;"></i> Get Help</h3>
+                        <p class="profile-section-desc" style="margin-bottom: 1.5rem; color: var(--text-secondary); font-size: 0.95rem;">Submit your query and our support team will respond via email shortly.</p>
+                        <form onsubmit="submitSupportTicket(event, 'help')">
+                            <div class="settings-input-row" style="margin-bottom: 1.2rem; display: block;">
+                                <label class="modern-form-label">Your Name</label>
+                                <input type="text" id="help-name" class="modern-form-input" placeholder="e.g. John Doe" required />
+                            </div>
+                            <div class="settings-input-row" style="margin-bottom: 1.5rem; display: block;">
+                                <label class="modern-form-label">How can we help you?</label>
+                                <textarea id="help-message" class="modern-form-input" placeholder="Describe your issue or question in detail..." required style="min-height: 140px; resize: vertical;"></textarea>
+                            </div>
+                            <button type="submit" class="modern-submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+                            <span class="field-status" id="help-status" style="margin-top: 1rem; display: block; text-align: center;"></span>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Report Tab -->
+                <div class="settings-tab-content" id="settings-report">
+                    <div class="profile-section-card" style="border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.03);">
+                        <h3 style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; color: var(--text-primary);"><i class="fas fa-bug" style="color: #ef4444;"></i> Report an Issue</h3>
+                        <p class="profile-section-desc" style="margin-bottom: 1.5rem; color: var(--text-secondary); font-size: 0.95rem;">Found a bug or inappropriate content? Let us know so we can fix it.</p>
+                        <form onsubmit="submitSupportTicket(event, 'report')">
+                            <div class="settings-input-row" style="margin-bottom: 1.2rem; display: block;">
+                                <label class="modern-form-label">Your Name</label>
+                                <input type="text" id="report-name" class="modern-form-input" placeholder="e.g. John Doe" required />
+                            </div>
+                            <div class="settings-input-row" style="margin-bottom: 1.5rem; display: block;">
+                                <label class="modern-form-label">Issue Details</label>
+                                <textarea id="report-message" class="modern-form-input" placeholder="Provide details about the bug, error, or content..." required style="min-height: 140px; resize: vertical;"></textarea>
+                            </div>
+                            <button type="submit" class="modern-submit-btn danger"><i class="fas fa-shield-alt"></i> Submit Report</button>
+                            <span class="field-status" id="report-status" style="margin-top: 1rem; display: block; text-align: center;"></span>
+                        </form>
+                    </div>
+                </div>
+
+                </div> <!-- End settings-content-area -->
+            </div>
+        </div>
+    </div>
+    <!-- Personalization Modal -->
+    <div class="auth-modal-overlay" id="personalization-modal" onclick="closePersonalizationModal(event)">
+        <div class="auth-modal-card" id="personalization-modal-card">
+            <button class="modal-close" onclick="closePersonalizationModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <h2>Personalization Settings</h2>
+            </div>
+            <div class="modal-body">
+                <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem;">Select your favorite categories to
+                    customize your "My Feed" news experience.</p>
+                <div id="personalization-categories" class="personalization-grid"
+                    style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;">
+                    <!-- Categories loaded dynamically -->
+                </div>
+                <div class="modal-actions"
+                    style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
+                    <button class="settings-tab-btn" onclick="closePersonalizationModal()">Cancel</button>
+                    <button class="settings-save-btn" onclick="savePersonalization()">Save Preferences</button>
+                </div>
+                <span class="field-status" id="personalization-status"
+                    style="margin-top: 1rem; display: block; text-align: right;"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="#" class="bottom-nav-item active" id="nav-home" onclick="showSection('news-feed'); return false;">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="bottom-nav-item" id="nav-bookmarks" onclick="showSavedArticles(); return false;">
+            <i class="far fa-bookmark"></i>
+            <span>Bookmarks</span>
+        </a>
+        <a href="#" class="bottom-nav-item" id="nav-myfeed" onclick="showPersonalizedFeed(); return false;">
+            <i class="far fa-folder"></i>
+            <span>My Feed</span>
+        </a>
+        <a href="#" class="bottom-nav-item" id="nav-profile" onclick="openProfileModal(); return false;">
+            <i class="far fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- Article Reader Modal -->
+    <div id="article-reader" class="article-reader-overlay reader-modal" style="display: none;">
+        <div class="reader-content-wrapper">
+            <header class="reader-header">
+                <button class="reader-back-btn" onclick="closeArticleReader()">
+                    <i class="fas fa-arrow-left"></i> <span>Back</span>
+                </button>
+                <div class="reader-header-actions">
+                    <button class="reader-action-btn" id="reader-bookmark-btn">
+                        <i class="far fa-star"></i>
+                    </button>
+                    <button class="reader-action-btn" id="reader-share-btn">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="reader-body">
+                <div class="reader-hero">
+                    <img id="reader-image" src="" alt="">
+                    <div class="reader-hero-overlay"></div>
+                </div>
+
+                <div class="reader-container">
+                    <div class="reader-meta">
+                        <span id="reader-category" class="reader-category-badge">Category</span>
+                        <span class="reader-meta-divider">•</span>
+                        <span id="reader-source" class="reader-source">Source</span>
+                        <span class="reader-meta-divider">•</span>
+                        <span id="reader-date" class="reader-date">Date</span>
+                    </div>
+
+                    <h1 id="reader-title">Article Title</h1>
+
+                    <div id="reader-text" class="reader-text">
+                        <!-- Content loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <footer class="reader-footer">
+                <a id="reader-external-link" href="#" target="_blank" rel="noopener noreferrer" class="read-full-btn">
+                    Read Full Article on <span id="reader-source-name">Source</span> <i
+                        class="fas fa-chevron-right"></i>
+                </a>
+            </footer>
+        </div>
+    </div>
+
 </body>
+
 </html>
